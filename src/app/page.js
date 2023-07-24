@@ -1,3 +1,16 @@
+import Head from 'next/head';
+
 export default function Home() {
-  return <h1>We Are Here!</h1>;
+  return (
+    <>
+      <h1>The Next Generation of Spotify</h1>
+
+      <main>
+        {/* Sidebar */}
+        {/* Center */}
+      </main>
+
+      <div>{/* Player */}</div>
+    </>
+  );
 }
