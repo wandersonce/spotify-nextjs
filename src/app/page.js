@@ -4,7 +4,7 @@ import Head from 'next/head';
 export default function Home() {
   return (
     <>
-      <main>
+      <main className="bg-black h-screen overflow-hidden">
         {/* Sidebar */}
         <Sidebar />
         {/* Center */}
