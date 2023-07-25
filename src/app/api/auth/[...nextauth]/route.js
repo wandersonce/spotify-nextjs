@@ -61,7 +61,14 @@ const handler = NextAuth({
       console.log('EXISTING TOKEN HAS EXPIRED');
       return await refreshAccessToken(token);
     },
+
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.user.username = token.username;
+
+      return session;
+    },
   },
 });
-
 export { handler as GET, handler as POST };
