@@ -1,3 +1,4 @@
+import { LOGIN_URL } from '@/lib/spotify';
 import NextAuth from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
@@ -6,6 +7,7 @@ const handler = NextAuth({
     SpotifyProvider({
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      authorization: LOGIN_URL,
     }),
   ],
 });
