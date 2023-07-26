@@ -10,11 +10,13 @@ import {
 } from '@heroicons/react/24/outline';
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { useAppContext } from '@/lib/AppContext';
 
 function Sidebar() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
+  const { playlistId, setPlaylistId } = useAppContext();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -72,7 +74,11 @@ function Sidebar() {
 
         {playlists.map((playlist) => {
           return (
-            <p key={playlist.id} className="cursor-pointer hover:text-white">
+            <p
+              key={playlist.id}
+              onClick={() => setPlaylistId(playlist.id)}
+              className="cursor-pointer hover:text-white"
+            >
               {playlist.name}
             </p>
           );
