@@ -9,13 +9,13 @@ export const AppProvider = ({ children }) => {
   const [playlistId, setPlaylistId] = useState('1bIRfHm6OUMLF6u7wnQEPl');
   // Define any functions or values you want to provide
 
-  const [playlistState, setPlaylistState] = useState(null);
+  const [playlistInfo, setPlaylistInfo] = useState(null);
 
   const playlistIdState = {
     playlistId,
     setPlaylistId,
-    playlistState,
-    setPlaylistState,
+    playlistInfo,
+    setPlaylistInfo,
   };
 
   return (

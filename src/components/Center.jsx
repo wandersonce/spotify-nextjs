@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { shuffle } from 'lodash';
 import useSpotify from '@/app/hooks/useSpotify';
+import Songs from './Songs';
 
 const colors = [
   'from-indigo-500',
@@ -20,7 +21,7 @@ function Center() {
   const { data: session } = useSession();
   const [color, setColor] = useState(null);
   const { playlistId } = useAppContext();
-  const { playlistState, setPlaylistState } = useAppContext();
+  const { playlistInfo, setPlaylistInfo } = useAppContext();
 
   const spotifyApi = useSpotify();
 
@@ -32,7 +33,7 @@ function Center() {
     spotifyApi
       .getPlaylist(playlistId)
       .then((data) => {
-        setPlaylistState(data.body);
+        setPlaylistInfo(data.body);
       })
       .catch((err) => console.log(err));
   }, [spotifyApi, playlistId]);
@@ -40,7 +41,7 @@ function Center() {
   return (
     <div className="flex-grow">
       <header className="absolute top-5 right-8">
-        <div className="bg-red-300 flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 p-1 pr-2 rounded-full">
+        <div className="text-white flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 p-1 pr-2 rounded-full">
           <img
             className="rounded-full w-10 h-10"
             src={session?.user.image}
@@ -54,8 +55,23 @@ function Center() {
       <section
         className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       >
-        {/* <img src="" alt="" /> */}
+        <img
+          className="h-44 w-44 shadow-2xl"
+          src={playlistInfo?.images[0]?.url}
+          alt={playlistInfo?.name}
+        />
+
+        <div>
+          <p>PLAYLIST</p>
+          <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">
+            {playlistInfo?.name}
+          </h1>
+        </div>
       </section>
+
+      <div>
+        <Songs />
+      </div>
     </div>
   );
 }
