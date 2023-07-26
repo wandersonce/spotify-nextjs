@@ -1,4 +1,5 @@
 'use client';
+import { useAppContext } from '@/lib/AppContext';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
@@ -17,11 +18,12 @@ const colors = [
 function Center() {
   const { data: session } = useSession();
   const [color, setColor] = useState(null);
+  const { playlistId, setPlaylistId } = useAppContext();
   // const playlistId = useRecoilValue(playlistIdState);
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
-  }, []);
+  }, [playlistId]);
 
   return (
     <div className="flex-grow">
