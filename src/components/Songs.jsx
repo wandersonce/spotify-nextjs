@@ -1,5 +1,12 @@
+import { useAppContext } from '@/lib/AppContext';
+
 function Songs() {
-  return <div>Songs</div>;
+  const { playlistInfo } = useAppContext();
+  return (
+    <div>
+      <p></p>
+    </div>
+  );
 }
 
 export default Songs;
