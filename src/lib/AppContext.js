@@ -11,11 +11,19 @@ export const AppProvider = ({ children }) => {
 
   const [playlistInfo, setPlaylistInfo] = useState(null);
 
+  //States to control the music playing
+  const [currentTrackId, setCurrentTrackId] = useState(null);
+  const [isPlayingState, setIsPlayingState] = useState(false);
+
   const playlistIdState = {
     playlistId,
     setPlaylistId,
     playlistInfo,
     setPlaylistInfo,
+    currentTrackId,
+    setCurrentTrackId,
+    isPlayingState,
+    setIsPlayingState,
   };
 
   return (

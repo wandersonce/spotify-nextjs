@@ -1,4 +1,5 @@
 import Center from '@/components/Center';
+import Player from '@/components/Player';
 import Sidebar from '@/components/Sidebar';
 
 export default async function Home() {
@@ -11,7 +12,9 @@ export default async function Home() {
         <Center />
       </main>
 
-      <div>{/* Player */}</div>
+      <div className="sticky bottom-0">
+        <Player />
+      </div>
     </>
   );
 }
