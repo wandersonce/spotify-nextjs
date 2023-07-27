@@ -1,7 +1,7 @@
 'use client';
 import { useAppContext } from '@/lib/AppContext';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { shuffle } from 'lodash';
 import useSpotify from '@/app/hooks/useSpotify';
@@ -36,10 +36,10 @@ function Center() {
         setPlaylistInfo(data.body);
       })
       .catch((err) => console.log(err));
-  }, [spotifyApi, playlistId]);
+  }, [spotifyApi, playlistId, session]);
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
         <div className="text-white flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 p-1 pr-2 rounded-full">
           <img
