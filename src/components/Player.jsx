@@ -5,6 +5,21 @@ import { useAppContext } from '@/lib/AppContext';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
+import {
+  HeartIcon,
+  SpeakerWaveIcon as VolumeDownIcon,
+} from '@heroicons/react/24/outline';
+
+import {
+  ArrowsRightLeftIcon,
+  BackwardIcon,
+  ForwardIcon,
+  SpeakerWaveIcon,
+  PlayIcon,
+  PauseIcon,
+  ArrowUturnLeftIcon,
+} from '@heroicons/react/24/solid';
+
 function Player() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
@@ -35,6 +50,18 @@ function Player() {
     }
   }, [currentTrackId, spotifyApi, session]);
 
+  const handlePlayPause = () => {
+    spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      if (data.body.is_playing) {
+        spotifyApi.pause();
+        setIsPlayingState(false);
+      } else {
+        spotifyApi.play();
+        setIsPlayingState(true);
+      }
+    });
+  };
+
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
       {/* Left */}
@@ -48,6 +75,25 @@ function Player() {
           <h3>{songInfo?.name}</h3>
           <p>{songInfo?.artists?.[0]?.name}</p>
         </div>
+      </div>
+
+      {/* center */}
+      <div className="flex items-center justify-evenly">
+        <ArrowsRightLeftIcon className="button" />
+        <BackwardIcon
+          onClick={() => spotifyApi.skipToPrevious()}
+          className="button"
+        />
+        {isPlayingState ? (
+          <PauseIcon onClick={handlePlayPause} className="button w-10 h-10" />
+        ) : (
+          <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
+        )}
+        <ForwardIcon
+          onClick={() => spotifyApi.skipToNext()}
+          className="button"
+        />
+        <ArrowUturnLeftIcon className="button" /> onClick=()
       </div>
     </div>
   );
