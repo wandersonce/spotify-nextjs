@@ -7,6 +7,8 @@ function useSongInfo() {
   const { currentTrackId, setCurrentTrackId } = useAppContext();
   const [songInfo, setSongInfo] = useState(null);
 
+  console.log(currentTrackId);
+
   useEffect(() => {
     const fetchSongInfo = async () => {
       if (currentTrackId) {
