@@ -93,7 +93,10 @@ function Player() {
           onClick={() => spotifyApi.skipToNext()}
           className="button"
         />
-        <ArrowUturnLeftIcon className="button" /> onClick=()
+        <ArrowUturnLeftIcon
+          className="button"
+          onClick={() => spotifyApi.skipToNext()}
+        />
       </div>
     </div>
   );
