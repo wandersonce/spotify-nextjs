@@ -18,6 +18,7 @@ import {
   PlayIcon,
   PauseIcon,
   ArrowUturnLeftIcon,
+  SpeakerXMarkIcon,
 } from '@heroicons/react/24/solid';
 import { debounce } from 'lodash';
 
@@ -72,7 +73,7 @@ function Player() {
   const debounceAdjustVolume = useCallback(
     debounce((volume) => {
       spotifyApi.setVolume(volume).catch((err) => {});
-    }, 500),
+    }, 300),
     []
   );
 
@@ -114,7 +115,9 @@ function Player() {
       </div>
 
       {/* RIGHT */}
+
       <div className="flex items-center space-x-3 md:space-x-4 justify-end">
+        <SpeakerXMarkIcon onClick={() => setVolume(1)} className="button" />
         <VolumeDownIcon
           onClick={() => volume > 0 && setVolume(volume - 10)}
           className="button"
