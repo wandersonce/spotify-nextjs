@@ -38,18 +38,26 @@ function Login() {
           Login with {providerName}
         </button>
       </div>
+
+      <div className="max-w-[500px] mt-10">
+        <p className="text-white text-sm text-center">
+          *This uses the API from Spotify, what you are only streaming the real
+          app. In order to make this work you need have one spotify app running
+          in any other place using the same account.
+        </p>
+      </div>
+
+      <div className="text-white absolute bottom-2 text-sm">
+        Developed by:{' '}
+        <a
+          className="text-green-700"
+          href="https://wanderson-portfolio.vercel.app/"
+        >
+          Wanderson Castro
+        </a>
+      </div>
     </div>
   );
 }
 
 export default Login;
-
-// export async function getServerSideProps() {
-//   const providers = await getProviders();
-//   console.log('here');
-//   return {
-//     props: {
-//       providers,
-//     },
-//   };
-// }
