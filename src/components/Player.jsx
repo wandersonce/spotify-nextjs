@@ -3,7 +3,7 @@ import useSongInfo from '@/app/hooks/useSongInfo';
 import useSpotify from '@/app/hooks/useSpotify';
 import { useAppContext } from '@/lib/AppContext';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import {
   HeartIcon,
@@ -19,6 +19,7 @@ import {
   PauseIcon,
   ArrowUturnLeftIcon,
 } from '@heroicons/react/24/solid';
+import { debounce } from 'lodash';
 
 function Player() {
   const spotifyApi = useSpotify();
@@ -62,6 +63,19 @@ function Player() {
     });
   };
 
+  useEffect(() => {
+    if (volume > 0 && volume < 100) {
+      debounceAdjustVolume(volume);
+    }
+  }, [volume]);
+
+  const debounceAdjustVolume = useCallback(
+    debounce((volume) => {
+      spotifyApi.setVolume(volume).catch((err) => {});
+    }, 500),
+    []
+  );
+
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
       {/* Left */}
@@ -96,6 +110,26 @@ function Player() {
         <ArrowUturnLeftIcon
           className="button"
           onClick={() => spotifyApi.skipToNext()}
+        />
+      </div>
+
+      {/* RIGHT */}
+      <div className="flex items-center space-x-3 md:space-x-4 justify-end">
+        <VolumeDownIcon
+          onClick={() => volume > 0 && setVolume(volume - 10)}
+          className="button"
+        />
+        <input
+          onChange={(e) => setVolume(Number(e.target.value))}
+          className="w-14 md:w-28"
+          type="range"
+          min={0}
+          max={100}
+          value={volume}
+        />
+        <SpeakerWaveIcon
+          onClick={() => volume < 100 && setVolume(volume + 10)}
+          className="button"
         />
       </div>
     </div>
