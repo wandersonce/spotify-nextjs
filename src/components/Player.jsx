@@ -5,10 +5,7 @@ import { useAppContext } from '@/lib/AppContext';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect, useState } from 'react';
 
-import {
-  HeartIcon,
-  SpeakerWaveIcon as VolumeDownIcon,
-} from '@heroicons/react/24/outline';
+import { SpeakerWaveIcon as VolumeDownIcon } from '@heroicons/react/24/outline';
 
 import {
   ArrowsRightLeftIcon,
@@ -115,7 +112,6 @@ function Player() {
       </div>
 
       {/* RIGHT */}
-
       <div className="flex items-center space-x-3 md:space-x-4 justify-end">
         <SpeakerXMarkIcon onClick={() => setVolume(1)} className="button" />
         <VolumeDownIcon
